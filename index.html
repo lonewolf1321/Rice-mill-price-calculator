@@ -12,10 +12,10 @@
     }
 
     body {
-      font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
+      font-family: 'Segoe UI', Arial, sans-serif;
       background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
       color: #333;
-      line-height: 1.6;
+      line-height: 1.5;
       padding: 10px;
       min-height: 100vh;
       display: flex;
@@ -27,28 +27,28 @@
 
     .app-container {
       width: 100%;
-      max-width: 420px;
+      max-width: 380px;
       background-color: white;
-      border-radius: 20px;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
       overflow: hidden;
-      padding: 15px;
+      padding: 16px;
     }
 
     .header {
       text-align: center;
-      margin: 0 0 12px;
+      margin: 0 0 16px;
       padding: 12px;
       background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
-      border-radius: 14px;
+      border-radius: 12px;
       color: white;
-      box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+      box-shadow: 0 3px 8px rgba(52, 152, 219, 0.3);
     }
 
     .header h1 {
       font-weight: 700;
-      font-size: 1.4rem;
-      margin-bottom: 3px;
+      font-size: 1.3rem;
+      margin-bottom: 4px;
       text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
       letter-spacing: 0.5px;
     }
@@ -61,10 +61,10 @@
     .tabs {
       display: flex;
       flex-direction: column;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
       background-color: #f8f9fa;
-      border-radius: 12px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     }
 
     .tab {
@@ -73,10 +73,10 @@
       border-bottom: 1px solid #eaeaea;
       user-select: none;
       transition: all 0.2s ease;
-      font-size: 1rem;
+      font-size: 0.95rem;
       color: #2c3e50;
       line-height: 1.4;
-      min-height: 60px;
+      min-height: 54px;
       display: flex;
       align-items: center;
       font-weight: 500;
@@ -90,26 +90,34 @@
       background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
       font-weight: 600;
       color: white;
-      box-shadow: 0 2px 8px rgba(52, 152, 219, 0.4);
-      border-radius: 10px;
-      transform: translateY(-1px);
+      box-shadow: 0 2px 6px rgba(52, 152, 219, 0.4);
+      border-radius: 8px;
     }
 
     .content {
-      border-radius: 16px;
-      padding: 15px;
+      border-radius: 12px;
+      padding: 16px;
       user-select: none;
       background-color: white;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      margin-bottom: 12px;
-      min-height: 170px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+      margin-bottom: 16px;
+    }
+
+    .quantity-section {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .quantity-label {
+      font-size: 0.9rem;
+      color: #7f8c8d;
+      margin-bottom: 8px;
+      font-weight: 500;
     }
 
     .wheel {
-      margin: 15px 0;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -117,16 +125,15 @@
     }
 
     .wheel button {
-      font-size: 1.8rem;
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
+      font-size: 1.6rem;
+      width: 50px;
+      height: 50px;
+      border-radius: 20%;
       border: none;
-      background: #3498db;
       color: white;
       cursor: pointer;
       transition: all 0.2s ease;
-      box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -135,120 +142,130 @@
       flex-shrink: 0;
     }
 
+    #subtract {
+      background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    }
+
+    #add {
+      background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    }
+
     .wheel button:active {
       transform: scale(0.95);
-      box-shadow: 0 2px 4px rgba(52, 152, 219, 0.3);
-      background: #2980b9;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
     }
 
     .quantity-display {
       display: flex;
-      align-items: center;
+      align-items: baseline;
       justify-content: center;
-      min-width: 140px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 10px 16px;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+      border: 1px solid #eaeaea;
+      min-width: 120px;
     }
 
     #kgDisplay {
       font-size: 1.8rem;
-      min-width: 80px;
       text-align: center;
       user-select: text;
       font-weight: 700;
       color: #2c3e50;
-      padding: 10px;
-      background-color: #f8f9fa;
-      border-radius: 10px;
     }
 
     #unitDisplay {
       font-weight: 600;
       color: #7f8c8d;
-      font-size: 1.2rem;
-      margin-left: 8px;
-      min-width: 40px;
+      font-size: 1rem;
+      margin-left: 6px;
     }
 
-    .info-line {
-      font-size: 1.1rem;
-      margin-bottom: 8px;
-      user-select: none;
+    .info-section {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .info-row {
       display: flex;
       justify-content: space-between;
-      padding: 8px 0;
+      align-items: center;
+      padding: 12px 0;
       border-bottom: 1px solid #f1f1f1;
+    }
+
+    .info-row:last-child {
+      border-bottom: none;
     }
 
     .info-label {
       color: #7f8c8d;
       font-weight: 500;
-      min-width: 120px;
+      font-size: 1rem;
     }
 
     .info-value {
       color: #2c3e50;
-      font-weight: 600;
+      font-weight: 700;
       text-align: right;
-      flex: 1;
-      overflow: hidden;
+      background: #f8f9fa;
+      padding: 8px 12px;
+      border-radius: 6px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      font-size: 1.05rem;
+      min-width: 100px;
     }
 
     .total-section {
       display: flex;
-      gap: 10px;
+      gap: 12px;
       margin-top: 8px;
     }
 
     .reset-container {
-      flex: 30%;
+      flex: 35%;
     }
 
     .total-container {
-      flex: 70%;
+      flex: 65%;
     }
 
     .reset-btn {
       width: 100%;
-      padding: 15px 8px;
+      padding: 14px 8px;
       background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
       border: none;
-      border-radius: 14px;
+      border-radius: 10px;
       color: white;
       font-size: 1rem;
       font-weight: bold;
       cursor: pointer;
-      box-shadow: 0 6px 15px rgba(231, 76, 60, 0.3);
+      box-shadow: 0 4px 8px rgba(231, 76, 60, 0.3);
       transition: all 0.2s ease;
+      height: 100%;
     }
 
     .reset-btn:active {
       transform: scale(0.97);
-      box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
+      box-shadow: 0 3px 6px rgba(231, 76, 60, 0.3);
     }
 
     .totalDisplay {
-      padding: 15px 8px;
+      padding: 14px 8px;
       background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       text-align: center;
-      border-radius: 14px;
+      border-radius: 10px;
       font-weight: bold;
       user-select: none;
       color: white;
-      box-shadow: 0 6px 15px rgba(52, 152, 219, 0.3);
+      box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
       height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-
-    /* Add a subtle animation for tab switching */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .content {
-      animation: fadeIn 0.3s ease;
     }
 
     /* Make it responsive for different screen sizes */
@@ -259,35 +276,35 @@
       
       .app-container {
         padding: 12px;
-        border-radius: 16px;
+        border-radius: 14px;
       }
       
       .tab {
-        font-size: 0.95rem;
+        font-size: 0.9rem;
         padding: 12px 10px;
-        min-height: 55px;
+        min-height: 50px;
       }
       
       .wheel button {
-        width: 50px;
-        height: 50px;
+        width: 46px;
+        height: 46px;
       }
       
-      .info-label {
-        min-width: 110px;
+      .info-value {
+        min-width: 90px;
       }
       
       .quantity-display {
-        min-width: 120px;
+        min-width: 110px;
       }
       
       .header {
         padding: 10px;
-        border-radius: 12px;
+        border-radius: 10px;
       }
       
       .header h1 {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
       }
     }
   </style>
@@ -300,21 +317,26 @@
     </div>
     <div class="tabs" id="tabs"></div>
     <div class="content">
-      <div class="wheel">
-        <button id="subtract">−</button>
-        <div class="quantity-display">
-          <span id="kgDisplay">0.0</span>
-          <span id="unitDisplay">kg</span>
+      <div class="quantity-section">
+        <div class="quantity-label">Quantity</div>
+        <div class="wheel">
+          <button id="subtract">−</button>
+          <div class="quantity-display">
+            <span id="kgDisplay">0.0</span>
+            <span id="unitDisplay">kg</span>
+          </div>
+          <button id="add">+</button>
         </div>
-        <button id="add">+</button>
       </div>
-      <div class="info-line">
-        <span class="info-label">Rate:</span>
-        <span class="info-value">₹<span id="rateDisplay">0</span> / <span id="unitDisplayInfo">kg</span></span>
-      </div>
-      <div class="info-line" style="margin-top: 16px; border-bottom: none;">
-        <span class="info-label">Product amount:</span>
-        <span class="info-value">₹<span id="prodAmt">0</span></span>
+      <div class="info-section">
+        <div class="info-row">
+          <span class="info-label">Rate:</span>
+          <span class="info-value">₹<span id="rateDisplay">0</span>/<span id="unitDisplayInfo">kg</span></span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Product Amount:</span>
+          <span class="info-value">₹<span id="prodAmt">0</span></span>
+        </div>
       </div>
     </div>
     <div class="total-section">
@@ -484,7 +506,7 @@
   
   // Reset button functionality
   resetBtn.addEventListener('click', () => {
-    if (confirm("Are you sure you want to reset all quantities?")) {
+    if (confirm("Reset all quantities?")) {
       quantities = new Array(products.length).fill(0);
       updateDisplay();
     }
