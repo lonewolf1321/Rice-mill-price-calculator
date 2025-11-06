@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Janaki Rice and Flour Mill</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+      color: #333;
+      line-height: 1.6;
+      padding: 10px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      touch-action: manipulation;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 420px;
+      background-color: white;
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+      padding: 15px;
+    }
+
+    .header {
+      text-align: center;
+      margin: 0 0 12px;
+      padding: 12px;
+      background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+      border-radius: 14px;
+      color: white;
+      box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+    }
+
+    .header h1 {
+      font-weight: 700;
+      font-size: 1.4rem;
+      margin-bottom: 3px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+      letter-spacing: 0.5px;
+    }
+
+    .header p {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .tabs {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 12px;
+      background-color: #f8f9fa;
+      border-radius: 12px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .tab {
+      padding: 14px 12px;
+      cursor: pointer;
+      border-bottom: 1px solid #eaeaea;
+      user-select: none;
+      transition: all 0.2s ease;
+      font-size: 1rem;
+      color: #2c3e50;
+      line-height: 1.4;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+    }
+
+    .tab:last-child {
+      border-bottom: none;
+    }
+
+    .tab.active {
+      background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+      font-weight: 600;
+      color: white;
+      box-shadow: 0 2px 8px rgba(52, 152, 219, 0.4);
+      border-radius: 10px;
+      transform: translateY(-1px);
+    }
+
+    .content {
+      border-radius: 16px;
+      padding: 15px;
+      user-select: none;
+      background-color: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      margin-bottom: 12px;
+      min-height: 170px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .wheel {
+      margin: 15px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .wheel button {
+      font-size: 1.8rem;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: none;
+      background: #3498db;
+      color: white;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      -webkit-user-select: none;
+      flex-shrink: 0;
+    }
+
+    .wheel button:active {
+      transform: scale(0.95);
+      box-shadow: 0 2px 4px rgba(52, 152, 219, 0.3);
+      background: #2980b9;
+    }
+
+    .quantity-display {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 140px;
+    }
+
+    #kgDisplay {
+      font-size: 1.8rem;
+      min-width: 80px;
+      text-align: center;
+      user-select: text;
+      font-weight: 700;
+      color: #2c3e50;
+      padding: 10px;
+      background-color: #f8f9fa;
+      border-radius: 10px;
+    }
+
+    #unitDisplay {
+      font-weight: 600;
+      color: #7f8c8d;
+      font-size: 1.2rem;
+      margin-left: 8px;
+      min-width: 40px;
+    }
+
+    .info-line {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      user-select: none;
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #f1f1f1;
+    }
+
+    .info-label {
+      color: #7f8c8d;
+      font-weight: 500;
+      min-width: 120px;
+    }
+
+    .info-value {
+      color: #2c3e50;
+      font-weight: 600;
+      text-align: right;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .total-section {
+      display: flex;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .reset-container {
+      flex: 30%;
+    }
+
+    .total-container {
+      flex: 70%;
+    }
+
+    .reset-btn {
+      width: 100%;
+      padding: 15px 8px;
+      background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+      border: none;
+      border-radius: 14px;
+      color: white;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(231, 76, 60, 0.3);
+      transition: all 0.2s ease;
+    }
+
+    .reset-btn:active {
+      transform: scale(0.97);
+      box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
+    }
+
+    .totalDisplay {
+      padding: 15px 8px;
+      background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+      font-size: 1.3rem;
+      text-align: center;
+      border-radius: 14px;
+      font-weight: bold;
+      user-select: none;
+      color: white;
+      box-shadow: 0 6px 15px rgba(52, 152, 219, 0.3);
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Add a subtle animation for tab switching */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .content {
+      animation: fadeIn 0.3s ease;
+    }
+
+    /* Make it responsive for different screen sizes */
+    @media (max-width: 360px) {
+      body {
+        padding: 8px;
+      }
+      
+      .app-container {
+        padding: 12px;
+        border-radius: 16px;
+      }
+      
+      .tab {
+        font-size: 0.95rem;
+        padding: 12px 10px;
+        min-height: 55px;
+      }
+      
+      .wheel button {
+        width: 50px;
+        height: 50px;
+      }
+      
+      .info-label {
+        min-width: 110px;
+      }
+      
+      .quantity-display {
+        min-width: 120px;
+      }
+      
+      .header {
+        padding: 10px;
+        border-radius: 12px;
+      }
+      
+      .header h1 {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <div class="header">
+      <h1>Janaki Rice & Flour Mill</h1>
+      <p>Price Calculator</p>
+    </div>
+    <div class="tabs" id="tabs"></div>
+    <div class="content">
+      <div class="wheel">
+        <button id="subtract">−</button>
+        <div class="quantity-display">
+          <span id="kgDisplay">0.0</span>
+          <span id="unitDisplay">kg</span>
+        </div>
+        <button id="add">+</button>
+      </div>
+      <div class="info-line">
+        <span class="info-label">Rate:</span>
+        <span class="info-value">₹<span id="rateDisplay">0</span> / <span id="unitDisplayInfo">kg</span></span>
+      </div>
+      <div class="info-line" style="margin-top: 16px; border-bottom: none;">
+        <span class="info-label">Product amount:</span>
+        <span class="info-value">₹<span id="prodAmt">0</span></span>
+      </div>
+    </div>
+    <div class="total-section">
+      <div class="reset-container">
+        <button class="reset-btn" id="resetBtn">Reset</button>
+      </div>
+      <div class="total-container">
+        <div class="totalDisplay">
+          Total: ₹<span id="totalAmt">0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  const products = [
+    { name: 'അരി / ഗോതമ്പ് പൊടിക്കൽ', rate: 12, unit: 'kg', increment: 0.5 },
+    { name: 'മല്ലി / മുളക് പൊടിക്കൽ', rate: 30, unit: 'kg', increment: 0.5 },
+    { name: 'മഞ്ഞൾ പൊടിക്കൽ', rate: 35, unit: 'kg', increment: 0.25 },
+    { name: 'തവിട്', rate: 8, unit: 'kg', increment: 1 },
+    { name: 'നെല്ലി അരിയാക്കാൻ (തവിട് ഇടാതെ)', rate: 37.5, unit: 'p', increment: 1 },
+    { name: 'നെല്ലി അരിയാക്കാൻ', rate: 12.5, unit: 'p', increment: 1 }
+  ];
+
+  let selected = 0;
+  let quantities = new Array(products.length).fill(0);
+  
+  // Variables for long press functionality
+  let pressTimer;
+  let isPressing = false;
+  let pressSpeed = 500; // Initial speed in ms
+  let pressInterval;
+
+  // UI elements
+  const tabs = document.getElementById('tabs');
+  const kgDisplay = document.getElementById('kgDisplay');
+  const unitDisplay = document.getElementById('unitDisplay');
+  const unitDisplayInfo = document.getElementById('unitDisplayInfo');
+  const rateDisplay = document.getElementById('rateDisplay');
+  const prodAmt = document.getElementById('prodAmt');
+  const totalAmt = document.getElementById('totalAmt');
+  const addBtn = document.getElementById('add');
+  const subtractBtn = document.getElementById('subtract');
+  const resetBtn = document.getElementById('resetBtn');
+
+  // Initialize tabs
+  products.forEach((prod, i) => {
+    const tab = document.createElement('div');
+    tab.className = 'tab' + (i === 0 ? ' active' : '');
+    tab.textContent = prod.name;
+    tab.addEventListener('click', () => selectTab(i));
+    tabs.appendChild(tab);
+  });
+
+  function selectTab(index) {
+    selected = index;
+    Array.from(tabs.children).forEach((tab, i) => {
+      tab.className = 'tab' + (i === index ? ' active' : '');
+    });
+    updateDisplay();
+  }
+
+  function scrollQuantity(step) {
+    let currentQty = quantities[selected];
+    const increment = products[selected].increment;
+    
+    // Special handling for തവിട് (index 3) - always use 1 kg increments
+    if (selected === 3) {
+      currentQty = currentQty + step;
+      if (currentQty < 0) currentQty = 0;
+      // No rounding needed as we're using whole numbers
+    } else if (products[selected].unit === 'kg') {
+      currentQty = +(currentQty + step * increment).toFixed(2);
+      if (currentQty < 0) currentQty = 0;
+      // For kg products, round to the nearest increment
+      currentQty = Math.round(currentQty / increment) * increment;
+    } else {
+      currentQty = currentQty + step;
+      if (currentQty < 0) currentQty = 0;
+    }
+    
+    quantities[selected] = currentQty;
+    updateDisplay();
+  }
+
+  function updateDisplay() {
+    const prod = products[selected];
+    const qty = quantities[selected];
+    kgDisplay.textContent = prod.unit === 'kg' ? qty.toFixed(2) : qty;
+    unitDisplay.textContent = prod.unit === 'kg' ? 'kg' : 'പാട്ട';
+    unitDisplayInfo.textContent = prod.unit === 'kg' ? 'kg' : 'പാട്ട';
+    rateDisplay.textContent = prod.rate;
+    
+    const productAmount = (qty * prod.rate).toFixed(2);
+    prodAmt.textContent = productAmount;
+
+    // Calculate total amount
+    let total = 0;
+    quantities.forEach((q, i) => {
+      total += q * products[i].rate;
+    });
+    totalAmt.textContent = total.toFixed(2);
+  }
+
+  // Long press functionality with 2-second delay
+  function startPress(step) {
+    // Set up long press with 2-second delay
+    pressTimer = setTimeout(() => {
+      // Start repeating with initial speed
+      pressInterval = setInterval(() => {
+        scrollQuantity(step);
+      }, pressSpeed);
+      
+      // Speed up after 1 second
+      setTimeout(() => {
+        if (pressInterval) {
+          clearInterval(pressInterval);
+          pressSpeed = 100; // Faster speed
+          pressInterval = setInterval(() => {
+            scrollQuantity(step);
+          }, pressSpeed);
+        }
+      }, 1000);
+    }, 2000); // Wait 2 seconds before starting to repeat
+  }
+
+  function stopPress() {
+    clearTimeout(pressTimer);
+    clearInterval(pressInterval);
+    pressSpeed = 500; // Reset to initial speed
+  }
+
+  // Single click functionality
+  function singleClick(step) {
+    scrollQuantity(step);
+  }
+
+  // Add button event listeners
+  addBtn.addEventListener('click', () => {
+    singleClick(1);
+  });
+  
+  subtractBtn.addEventListener('click', () => {
+    singleClick(-1);
+  });
+  
+  // Long press events
+  addBtn.addEventListener('mousedown', () => {
+    startPress(1);
+  });
+  
+  addBtn.addEventListener('touchstart', () => {
+    startPress(1);
+  });
+  
+  subtractBtn.addEventListener('mousedown', () => {
+    startPress(-1);
+  });
+  
+  subtractBtn.addEventListener('touchstart', () => {
+    startPress(-1);
+  });
+  
+  // Stop pressing when mouse/touch ends
+  document.addEventListener('mouseup', stopPress);
+  document.addEventListener('touchend', stopPress);
+  
+  // Reset button functionality
+  resetBtn.addEventListener('click', () => {
+    if (confirm("Are you sure you want to reset all quantities?")) {
+      quantities = new Array(products.length).fill(0);
+      updateDisplay();
+    }
+  });
+
+  // Initialize first tab display
+  selectTab(0);
+</script>
+</body>
+</html>
