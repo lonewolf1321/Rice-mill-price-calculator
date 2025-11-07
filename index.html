@@ -11,76 +11,80 @@
       padding: 0;
     }
 
+    :root {
+      --primary-color: #ff9500;
+      --reset-color: #ff3b30;
+      --secondary-color: #505050;
+      --background-color: #1c1c1e;
+      --card-color: #2c2c2e;
+      --text-color: #ffffff;
+      --shadow-color: rgba(0, 0, 0, 0.3);
+    }
+
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
-      background: #000000;
-  /* Remove the gradient line: background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); */
-      color: #333;
+      background: var(--background-color);
+      color: var(--text-color);
       line-height: 1.5;
-      padding: 10px;
-      min-height: 100vh;
+      height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
       touch-action: manipulation;
+      overflow: hidden;
     }
 
     .app-container {
       width: 100%;
-      max-width: 380px;
-      background-color: white;
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-      overflow: hidden;
-      padding: 16px;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: var(--background-color);
     }
 
     .header {
-      text-align: center;
-      margin: 0 0 16px;
-      padding: 12px;
-      background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
-      border-radius: 12px;
-      color: white;
-      box-shadow: 0 3px 8px rgba(231, 76, 60, 0.3);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    .header h1 {
-      font-weight: 700;
-      font-size: 1.3rem;
-      margin-bottom: 4px;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-      letter-spacing: 0.5px;
+    .app-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-color);
     }
 
-    .header p {
-      font-size: 0.9rem;
-      opacity: 0.9;
+    .app-subtitle {
+      color: #aaa;
+      font-size: 16px;
+      font-weight: 500;
     }
 
     .tabs {
       display: flex;
       flex-direction: column;
-      margin-bottom: 16px;
-      background-color: #f8f9fa;
-      border-radius: 10px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      margin: 0;
+      background-color: var(--card-color);
+      overflow: hidden;
+      flex: 1;
+      max-height: 40vh;
+      overflow-y: auto;
     }
 
     .tab {
-      padding: 14px 12px;
+      padding: 20px;
       cursor: pointer;
-      border-bottom: 1px solid #eaeaea;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       user-select: none;
       transition: all 0.2s ease;
-      font-size: 0.95rem;
-      color: #2c3e50;
+      font-size: 18px;
+      color: white;
       line-height: 1.4;
-      min-height: 54px;
       display: flex;
       align-items: center;
       font-weight: 500;
+      min-height: 70px;
     }
 
     .tab:last-child {
@@ -88,33 +92,33 @@
     }
 
     .tab.active {
-      background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+      background: rgba(255, 149, 0, 0.3);
       font-weight: 600;
       color: white;
-      box-shadow: 0 2px 6px rgba(52, 152, 219, 0.4);
-      border-radius: 8px;
+      border-left: 4px solid var(--primary-color);
     }
 
     .content {
-      border-radius: 12px;
-      padding: 16px;
+      flex: 1;
+      padding: 24px;
       user-select: none;
-      background-color: white;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
-      margin-bottom: 16px;
+      background-color: var(--background-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .quantity-section {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
 
     .quantity-label {
-      font-size: 0.9rem;
-      color: #7f8c8d;
-      margin-bottom: 8px;
+      font-size: 16px;
+      color: #aaa;
+      margin-bottom: 20px;
       font-weight: 500;
     }
 
@@ -122,19 +126,20 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 16px;
+      gap: 20px;
     }
 
     .wheel button {
-      font-size: 1.6rem;
-      width: 50px;
-      height: 50px;
-      border-radius: 20%;
+      font-size: 2rem;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
       border: none;
-      color: white;
       cursor: pointer;
       transition: all 0.2s ease;
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+      box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -144,57 +149,62 @@
     }
 
     #subtract {
-      background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+      background: #3a3a3c;
+      color: white;
     }
 
     #add {
-      background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+      background: var(--primary-color);
+      color: #000000;
+      font-weight: bold;
     }
 
     .wheel button:active {
-      transform: scale(0.95);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+      transform: translateY(2px);
+      box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
 
     .quantity-display {
       display: flex;
       align-items: baseline;
       justify-content: center;
-      background: #f8f9fa;
-      border-radius: 10px;
-      padding: 10px 16px;
-      box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
-      border: 1px solid #eaeaea;
-      min-width: 120px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 20px 24px;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      min-width: 160px;
     }
 
     #kgDisplay {
-      font-size: 1.8rem;
+      font-size: 2.5rem;
       text-align: center;
       user-select: text;
       font-weight: 700;
-      color: #2c3e50;
+      color: var(--text-color);
     }
 
     #unitDisplay {
       font-weight: 600;
-      color: #7f8c8d;
-      font-size: 1rem;
-      margin-left: 6px;
+      color: #aaa;
+      font-size: 1.2rem;
+      margin-left: 8px;
     }
 
     .info-section {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 20px;
     }
 
     .info-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 12px 0;
-      border-bottom: 1px solid #f1f1f1;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .info-row:last-child {
@@ -202,27 +212,27 @@
     }
 
     .info-label {
-      color: #7f8c8d;
+      color: #aaa;
       font-weight: 500;
-      font-size: 1rem;
+      font-size: 16px;
     }
 
     .info-value {
-      color: #2c3e50;
+      color: var(--text-color);
       font-weight: 700;
       text-align: right;
-      background: #f8f9fa;
-      padding: 8px 12px;
-      border-radius: 6px;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-      font-size: 1.05rem;
-      min-width: 100px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 12px 16px;
+      border-radius: 12px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      font-size: 16px;
+      min-width: 140px;
     }
 
     .total-section {
       display: flex;
-      gap: 12px;
-      margin-top: 8px;
+      gap: 16px;
+      margin-top: 16px;
     }
 
     .reset-container {
@@ -235,88 +245,70 @@
 
     .reset-btn {
       width: 100%;
-      padding: 14px 8px;
-      background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+      padding: 18px 8px;
+      background: var(--reset-color);
       border: none;
-      border-radius: 10px;
+      border-radius: 16px;
       color: white;
-      font-size: 1rem;
+      font-size: 16px;
       font-weight: bold;
       cursor: pointer;
-      box-shadow: 0 4px 8px rgba(231, 76, 60, 0.3);
+      box-shadow: 
+        0 4px 8px rgba(255, 59, 48, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
       transition: all 0.2s ease;
       height: 100%;
     }
 
     .reset-btn:active {
-      transform: scale(0.97);
-      box-shadow: 0 3px 6px rgba(231, 76, 60, 0.3);
+      transform: translateY(2px);
+      box-shadow: 
+        0 2px 4px rgba(255, 59, 48, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
 
     .totalDisplay {
-      padding: 14px 8px;
-      background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
-      font-size: 1.2rem;
+      padding: 18px 8px;
+      background: var(--primary-color);
+      font-size: 18px;
       text-align: center;
-      border-radius: 10px;
+      border-radius: 16px;
       font-weight: bold;
       user-select: none;
-      color: white;
-      box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+      color: #000000;
+      box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
       height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    /* Make it responsive for different screen sizes */
-    @media (max-width: 360px) {
-      body {
-        padding: 8px;
-      }
-      
-      .app-container {
-        padding: 12px;
-        border-radius: 14px;
-      }
-      
-      .tab {
-        font-size: 0.9rem;
-        padding: 12px 10px;
-        min-height: 50px;
-      }
-      
-      .wheel button {
-        width: 46px;
-        height: 46px;
-      }
-      
-      .info-value {
-        min-width: 90px;
-      }
-      
-      .quantity-display {
-        min-width: 110px;
-      }
-      
-      .header {
-        padding: 10px;
-        border-radius: 10px;
-      }
-      
-      .header h1 {
-        font-size: 1.2rem;
-      }
+    /* Scrollbar styling for tabs */
+    .tabs::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .tabs::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .tabs::-webkit-scrollbar-thumb {
+      background: var(--primary-color);
+      border-radius: 3px;
     }
   </style>
 </head>
 <body>
   <div class="app-container">
     <div class="header">
-      <h1>Janaki Rice & Flour Mill</h1>
-      <p>Price Calculator</p>
+      <div class="app-title">Janaki Rice & Flour Mill</div>
+      <div class="app-subtitle">Price Calculator</div>
     </div>
+    
     <div class="tabs" id="tabs"></div>
+    
     <div class="content">
       <div class="quantity-section">
         <div class="quantity-label">Quantity</div>
@@ -329,6 +321,7 @@
           <button id="add">+</button>
         </div>
       </div>
+      
       <div class="info-section">
         <div class="info-row">
           <span class="info-label">Rate:</span>
@@ -339,14 +332,15 @@
           <span class="info-value">₹<span id="prodAmt">0</span></span>
         </div>
       </div>
-    </div>
-    <div class="total-section">
-      <div class="reset-container">
-        <button class="reset-btn" id="resetBtn">Reset</button>
-      </div>
-      <div class="total-container">
-        <div class="totalDisplay">
-          Total: ₹<span id="totalAmt">0</span>
+      
+      <div class="total-section">
+        <div class="reset-container">
+          <button class="reset-btn" id="resetBtn">Reset</button>
+        </div>
+        <div class="total-container">
+          <div class="totalDisplay">
+            Total: ₹<span id="totalAmt">0</span>
+          </div>
         </div>
       </div>
     </div>
