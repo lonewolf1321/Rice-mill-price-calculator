@@ -50,10 +50,13 @@
     }
 
     .app-title {
-      font-size: 20px;
-      font-weight: 600;
-      color: var(--text-color);
-    }
+    font-size: 20px;
+    font-weight: 700;
+    color: #ff9500;
+    text-shadow: 0 2px 8px rgba(255, 149, 0, 0.4), 
+                 0 4px 12px rgba(0, 0, 0, 0.3);
+    letter-spacing: 0.5px;
+}
 
     .app-subtitle {
       color: #aaa;
@@ -67,13 +70,12 @@
       margin: 0;
       background-color: var(--card-color);
       overflow: hidden;
-      flex: 1;
-      max-height: 40vh;
+      max-height: 35vh;
       overflow-y: auto;
     }
 
     .tab {
-      padding: 20px;
+      padding: 16px 20px;
       cursor: pointer;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       user-select: none;
@@ -100,26 +102,18 @@
 
     .content {
       flex: 1;
-      padding: 24px;
+      padding: 20px;
       user-select: none;
       background-color: var(--background-color);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
     }
 
     .quantity-section {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 24px;
-    }
-
-    .quantity-label {
-      font-size: 16px;
-      color: #aaa;
       margin-bottom: 20px;
-      font-weight: 500;
     }
 
     .wheel {
@@ -195,44 +189,39 @@
 
     .info-section {
       display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .info-row {
-      display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 16px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 16px;
+      margin-bottom: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
-    .info-row:last-child {
-      border-bottom: none;
+    .rate-info, .amount-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
     }
 
     .info-label {
       color: #aaa;
       font-weight: 500;
-      font-size: 16px;
+      font-size: 14px;
+      margin-bottom: 5px;
     }
 
     .info-value {
       color: var(--text-color);
       font-weight: 700;
-      text-align: right;
-      background: rgba(255, 255, 255, 0.05);
-      padding: 12px 16px;
-      border-radius: 12px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      font-size: 16px;
-      min-width: 140px;
+      font-size: 18px;
     }
 
     .total-section {
       display: flex;
       gap: 16px;
-      margin-top: 16px;
+      margin-top: 0;
     }
 
     .reset-container {
@@ -298,6 +287,15 @@
       background: var(--primary-color);
       border-radius: 3px;
     }
+
+    /* Safe area insets for mobile browsers */
+    @supports(padding: max(0px)) {
+      .app-container {
+        padding-left: max(0px, env(safe-area-inset-left));
+        padding-right: max(0px, env(safe-area-inset-right));
+        padding-bottom: max(0px, env(safe-area-inset-bottom));
+      }
+    }
   </style>
 </head>
 <body>
@@ -311,7 +309,6 @@
     
     <div class="content">
       <div class="quantity-section">
-        <div class="quantity-label">Quantity</div>
         <div class="wheel">
           <button id="subtract">−</button>
           <div class="quantity-display">
@@ -323,12 +320,12 @@
       </div>
       
       <div class="info-section">
-        <div class="info-row">
-          <span class="info-label">Rate:</span>
+        <div class="rate-info">
+          <span class="info-label">Rate</span>
           <span class="info-value">₹<span id="rateDisplay">0</span>/<span id="unitDisplayInfo">kg</span></span>
         </div>
-        <div class="info-row">
-          <span class="info-label">Product Amount:</span>
+        <div class="amount-info">
+          <span class="info-label">Product Amount</span>
           <span class="info-value">₹<span id="prodAmt">0</span></span>
         </div>
       </div>
@@ -352,8 +349,8 @@
     { name: 'മല്ലി / മുളക് പൊടിക്കൽ', rate: 30, unit: 'kg', increment: 0.5 },
     { name: 'മഞ്ഞൾ പൊടിക്കൽ', rate: 35, unit: 'kg', increment: 0.25 },
     { name: 'തവിട്', rate: 8, unit: 'kg', increment: 1 },
-    { name: 'നെല്ലി അരിയാക്കാൻ (തവിട് ഇടാതെ)', rate: 37.5, unit: 'p', increment: 1 },
-    { name: 'നെല്ലി അരിയാക്കാൻ', rate: 12.5, unit: 'p', increment: 1 }
+    { name: 'നെല്ലി അരിയാക്കാൻ', rate: 12.5, unit: 'p', increment: 1 },
+    { name: 'നെല്ലി അരിയാക്കാൻ (തവിട് ഇടാതെ)', rate: 37.5, unit: 'p', increment: 1 }
   ];
 
   let selected = 0;
